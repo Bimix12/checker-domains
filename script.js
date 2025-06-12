@@ -1,4 +1,4 @@
-// script.js (CORRECTED VERSION)
+// script.js (VERSION LI KAT-AFFICHI GHIR LES DOMAINES L-MSJJLIN)
 
 document.getElementById('checkButton').addEventListener('click', () => {
     const domainListText = document.getElementById('domainList').value;
@@ -6,12 +6,11 @@ document.getElementById('checkButton').addEventListener('click', () => {
     const loader = document.getElementById('loader');
     const checkButton = document.getElementById('checkButton');
 
-    // Kan7ido AY IMTIDAD mkhdom bih, machi ghir .com
     const extensionsToRemove = /(\.com|\.net|\.co|\.co\.in|\.in|\.us)$/;
 
     const domainNames = domainListText.split('\n')
-        .map(d => d.trim().toLowerCase().replace(extensionsToRemove, '')) // <<<=== HNA FIN KAYN L-TBDIL L-MOHIM
-        .filter(d => d.length > 0 && d.indexOf('.') === -1); // Kan-checkiw bli ism safi bla point
+        .map(d => d.trim().toLowerCase().replace(extensionsToRemove, ''))
+        .filter(d => d.length > 0 && d.indexOf('.') === -1);
 
     if (domainNames.length === 0) {
         resultsDiv.innerHTML = '<p style="color: red;">Please enter at least one valid domain name (without extension).</p>';
@@ -44,24 +43,34 @@ document.getElementById('checkButton').addEventListener('click', () => {
             return;
         }
 
-        data.forEach(item => {
-            const resultItem = document.createElement('div');
-            resultItem.classList.add('result-item');
-            
-            const statusClass = item.isAvailable ? 'available' : 'registered';
-            const statusText = item.isAvailable ? 'Available' : 'Registered';
-            
-            resultItem.innerHTML = `
-                <span>${item.domain}</span>
-                <span class="status ${statusClass}">${statusText}</span>
-            `;
-            resultsDiv.appendChild(resultItem);
-        });
+        // <<<=== HNA FIN KAYN L-TBDIL L-ASASSI ===>>>
+        // 1. Kanfiltriw bach nakhdo ghir les items li MHOMCH mota7in (ya3ni msjjlin)
+        const registeredDomains = data.filter(item => !item.isAvailable); // isAvailable = false
+
+        // 2. Kancheckiw wach lqina chi wahd
+        if (registeredDomains.length === 0) {
+            resultsDiv.innerHTML = '<p>Good news! No registered domains were found for these names.</p>';
+        } else {
+            // 3. Kan-affichiw ghir dok li lqina msjjlin
+            registeredDomains.forEach(item => {
+                const resultItem = document.createElement('div');
+                resultItem.classList.add('result-item');
+                
+                const statusClass = 'registered';
+                const statusText = 'Registered';
+                
+                resultItem.innerHTML = `
+                    <span>${item.domain}</span>
+                    <span class="status ${statusClass}">${statusText}</span>
+                `;
+                resultsDiv.appendChild(resultItem);
+            });
+        }
     })
     .catch(error => {
         loader.style.display = 'none';
         checkButton.disabled = false;
-        resultsDiv.innerHTML = `<p style="color: red;">An unexpected error occurred. This can happen if the check takes too long on Vercel's free plan. Try with a smaller list.</p>`;
+        resultsDiv.innerHTML = `<p style="color: red;">An unexpected error occurred. This can happen if the check takes too long. Try with a smaller list.</p>`;
         console.error('Fetch Error:', error);
     });
 });
