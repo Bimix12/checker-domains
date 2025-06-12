@@ -1,15 +1,20 @@
+// script.js (CORRECTED VERSION)
+
 document.getElementById('checkButton').addEventListener('click', () => {
     const domainListText = document.getElementById('domainList').value;
     const resultsDiv = document.getElementById('results');
     const loader = document.getElementById('loader');
     const checkButton = document.getElementById('checkButton');
 
+    // Kan7ido AY IMTIDAD mkhdom bih, machi ghir .com
+    const extensionsToRemove = /(\.com|\.net|\.co|\.co\.in|\.in|\.us)$/;
+
     const domainNames = domainListText.split('\n')
-        .map(d => d.trim().replace(/\.com$/, '').toLowerCase())
-        .filter(d => d.length > 0);
+        .map(d => d.trim().toLowerCase().replace(extensionsToRemove, '')) // <<<=== HNA FIN KAYN L-TBDIL L-MOHIM
+        .filter(d => d.length > 0 && d.indexOf('.') === -1); // Kan-checkiw bli ism safi bla point
 
     if (domainNames.length === 0) {
-        resultsDiv.innerHTML = '<p style="color: red;">Please enter at least one domain name.</p>';
+        resultsDiv.innerHTML = '<p style="color: red;">Please enter at least one valid domain name (without extension).</p>';
         return;
     }
 
