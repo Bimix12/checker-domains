@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Domain Availability Checker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Bulk Domain Availability Checker</h1>
+        <p>Enter a list of domain names (without .com) to check their availability across other popular extensions.</p>
+        <textarea id="domainList" rows="10" placeholder="example1
+my-domain
+anothername"></textarea>
+        <button id="checkButton">Check Now</button>
+        <div id="loader" class="loader" style="display:none;"></div>
+        <h2>Results:</h2>
+        <div id="results"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
