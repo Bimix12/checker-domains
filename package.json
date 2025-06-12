@@ -1,0 +1,19 @@
+{
+  "name": "domain-checker-vercel",
+  "version": "1.0.0",
+  "description": "A bulk domain checker deployed on Vercel.",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "domain",
+    "checker",
+    "vercel"
+  ],
+  "author": "Your Name",
+  "license": "ISC",
+  "dependencies": {
+    "whois-json": "^2.0.7"
+  }
+}
